@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowDown, Check, Copy, FileText, Sparkles, MapPin, Terminal, Code2, BookOpen, Layers } from 'lucide-react';
+import { ArrowDown, Check, Copy, FileText, MapPin } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { playClickSound, playSuccessSound } from '../utils/sound';
 
@@ -11,7 +11,6 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenContact }) => {
   const [copied, setCopied] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const [activeTab, setActiveTab] = useState<'profile' | 'focus' | 'bash'>('profile');
   const [roleIndex, setRoleIndex] = useState(0);
 
   const roles = [
@@ -64,82 +63,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenContact }) => {
             <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans max-w-2xl font-normal">
               {PORTFOLIO_DATA.bio}
             </p>
-
-            {/* Interactive Student Terminal Widget */}
-            <div className="rounded-2xl bg-neutral-950/90 dark:bg-[#070103]/95 border border-neutral-300/40 dark:border-rose-950/90 shadow-xl overflow-hidden font-mono text-xs">
-              {/* Terminal Window Chrome */}
-              <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/80 dark:bg-black/80 border-b border-neutral-800 dark:border-rose-950/60">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-600/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 text-[11px] text-neutral-400 font-tech">student_env ~ zsh</span>
-                </div>
-
-                {/* Tabs */}
-                <div className="flex items-center gap-1">
-                  {[
-                    { id: 'profile', label: 'student.py' },
-                    { id: 'focus', label: 'interests.json' },
-                    { id: 'bash', label: 'status.sh' },
-                  ].map((tab) => (
-                    <button
-                      key={tab.id}
-                      onClick={() => {
-                        playClickSound(700, 0.02);
-                        setActiveTab(tab.id as typeof activeTab);
-                      }}
-                      className={`px-2.5 py-1 rounded text-[11px] font-tech tracking-wide transition-colors ${
-                        activeTab === tab.id
-                          ? 'bg-rose-950/80 text-red-400 border border-rose-900/60'
-                          : 'text-neutral-400 hover:text-white'
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Terminal Body */}
-              <div className="p-4 text-neutral-300 font-mono space-y-1.5 overflow-x-auto">
-                {activeTab === 'profile' && (
-                  <>
-                    <div className="text-neutral-500"># Computer Science & Engineering Undergraduate</div>
-                    <div><span className="text-rose-400">class</span> <span className="text-amber-300">UndergradStudent</span>:</div>
-                    <div className="pl-4">name = <span className="text-emerald-400">"Venkat Reddy Vaddi"</span></div>
-                    <div className="pl-4">college = <span className="text-emerald-400">"NIAT X Joy University"</span></div>
-                    <div className="pl-4">program = <span className="text-emerald-400">"B.Tech CSE with AI & ML"</span></div>
-                    <div className="pl-4">level = <span className="text-emerald-400">"Enthusiastic Beginner Programmer"</span></div>
-                    <div className="pl-4">core_languages = [<span className="text-emerald-400">"Python"</span>, <span className="text-emerald-400">"C"</span>, <span className="text-emerald-400">"JavaScript"</span>]</div>
-                  </>
-                )}
-
-                {activeTab === 'focus' && (
-                  <>
-                    <div className="text-neutral-500">// Machine Learning & Development Areas</div>
-                    <div>{'{'}</div>
-                    <div className="pl-4"><span className="text-rose-400">"primary_field"</span>: <span className="text-emerald-400">"Artificial Intelligence & ML"</span>,</div>
-                    <div className="pl-4"><span className="text-rose-400">"active_topics"</span>: [</div>
-                    <div className="pl-8"><span className="text-emerald-400">"Scikit-learn"</span>, <span className="text-emerald-400">"Computer Vision (CNN basics)"</span>,</div>
-                    <div className="pl-8"><span className="text-emerald-400">"Gradient Descent Optimization"</span>, <span className="text-emerald-400">"Data Structures"</span></div>
-                    <div className="pl-4">],</div>
-                    <div className="pl-4"><span className="text-rose-400">"target_role"</span>: <span className="text-emerald-400">"Software Engineer Intern / AI Apprentice"</span></div>
-                    <div>{'}'}</div>
-                  </>
-                )}
-
-                {activeTab === 'bash' && (
-                  <>
-                    <div className="text-neutral-500">$ check_student_availability</div>
-                    <div><span className="text-red-500">➜</span> <span className="text-neutral-300">Location:</span> Joy University Campus, India</div>
-                    <div><span className="text-red-500">➜</span> <span className="text-neutral-300">Internship Window:</span> Available for Summer/Fall Internships</div>
-                    <div><span className="text-red-500">➜</span> <span className="text-neutral-300">Hackathon Teammate:</span> Ready to collaborate</div>
-                    <div className="text-emerald-400 pt-1">✔ System ready: contact venkatvaddi1329@gmail.com</div>
-                  </>
-                )}
-              </div>
-            </div>
 
             {/* Action Buttons */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
